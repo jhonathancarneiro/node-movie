@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  name           String
+  password       String
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @updatedAt
+  favoriteMovies FavoriteMovie[]
+
+  @@map("users")
+}
+
+model Movie {
+  id            String          @id @default(uuid())
+  title         String          @unique
+  duration      Int
+  release_Date  DateTime
+  description   String
+  url_Image String
+  FavoriteMovie FavoriteMovie[]
+
+  @@map("movies")
+}
+
+model FavoriteMovie {
+  id      String @id @default(uuid())
+  userId  String
+  movieId String
+  user    User   @relation(fields: [userId], references: [id])
+  movie   Movie  @relation(fields: [movieId], references: [id])
+
+  @@unique([userId, movieId])
+  @@map("favorites")
+}
