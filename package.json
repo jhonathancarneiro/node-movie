@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
-    "build": "node build --output public"
+    "start": "node server.js",
+    "build": "yarn install && yarn build"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
