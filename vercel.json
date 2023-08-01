@@ -1,9 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "yarn install && yarn generate && yarn build", "use": "@vercel/node" }
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "index.js" }
+    {
+      "src": "/(.*)",
+      "dest": "src/server.ts"
+    }
   ]
 }
