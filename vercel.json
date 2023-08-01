@@ -1,3 +1,18 @@
 {
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.ts", // Caminho para o arquivo que contém a configuração do servidor (arquivo do servidor)
+      "use": "@vercel/node@v12" // Versão do Node.js
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/server.ts" // Caminho para o arquivo que contém a configuração do servidor (arquivo do servidor)
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
